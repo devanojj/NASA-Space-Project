@@ -1,0 +1,23 @@
+{
+  "name": "nasa-space-project",
+  "version": "1.0.0",
+  "description": "Monorepo for NASA Space Project with frontend and backend services",
+  "main": "index.js",
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend":  "pnpm --filter backend dev",
+    "build:frontend": "pnpm --filter frontend build",
+    "build:backend":  "pnpm --filter backend build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "packages/*"
+  ]
+}
