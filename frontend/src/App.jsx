@@ -4,10 +4,10 @@ export default function App() {
   const [apod, setApod] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const API_BASE = import.meta.env.VITE_API_URL || ''
 
   useEffect(() => {
-    // you can also pass ?date=YYYY-MM-DD if you like
-    fetch('/api/apod')
+    fetch(`${API_BASE}/api/apod`)
       .then(res => {
         if (!res.ok) throw new Error(`API error: ${res.status}`)
         return res.json()
