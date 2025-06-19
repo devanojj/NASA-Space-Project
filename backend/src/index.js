@@ -18,6 +18,4 @@ app.get('/api/apod', async (req, res) => {
   }
 });
 
-app.listen(port, () =>
-  console.log(`🚀 API listening on http://localhost:${port}`)
-);
+app.listen(port, () => console.log(`API listening on port ${port}`));
