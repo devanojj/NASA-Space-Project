@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
+
 export default function App() {
   const [apod, setApod] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const API_BASE = import.meta.env.VITE_API_URL || ''
-
+ 
   useEffect(() => {
     fetch(`${API_BASE}/api/apod`)
       .then(res => {
