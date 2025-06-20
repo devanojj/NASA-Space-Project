@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/568fdb8a-c19f-4b12-ba38-c49004920cb7/resourceGroups/rg-nasa/providers/Microsoft.Web/sites/nasa-backend-api",
+    "appService.deploySubpath": "backend"
+}
