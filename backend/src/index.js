@@ -1,12 +1,16 @@
 import express from 'express';
 import dotenv  from 'dotenv';
 import { fetchApod } from './services/nasa.js';
+import cors from 'cors'
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.use(cors({
+  origin: 'https://witty-hill-082a98a03.1.azurestaticapps.net'
+}))
 
 app.get('/api/apod', async (req, res) => {
   try {
