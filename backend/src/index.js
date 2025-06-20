@@ -2,11 +2,16 @@ import express from 'express';
 import dotenv  from 'dotenv';
 import { fetchApod } from './services/nasa.js';
 import cors from 'cors'
+import helmet from 'helmet';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+app.use(helmet({
+  contentSecurityPolicy: false
+}));
 
 app.use(cors({
   origin: 'https://witty-hill-082a98a03.1.azurestaticapps.net'
