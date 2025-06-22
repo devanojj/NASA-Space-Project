@@ -2,14 +2,20 @@ import { useState, useEffect } from 'react'
 
 const API_BASE = import.meta.env.VITE_API_URL || ''
 
-
 export default function App() {
   const [apod, setApod] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
- 
-  useEffect(() => {
-    fetch(`${API_BASE}/api/apod`)
+  const [date, setDate] = useState('')
+
+  // Fetch APOD data for a given date (or today if no date)
+  const fetchApod = (selectedDate = '') => {
+    setLoading(true)
+    setError(null)
+    const url = selectedDate
+      ? `${API_BASE}/api/apod?date=${selectedDate}`
+      : `${API_BASE}/api/apod`
+    fetch(url)
       .then(res => {
         if (!res.ok) throw new Error(`API error: ${res.status}`)
         return res.json()
@@ -23,28 +29,48 @@ export default function App() {
         setError(err.message)
         setLoading(false)
       })
+  }
+
+  // Fetch today's APOD on mount
+  useEffect(() => {
+    fetchApod()
   }, [])
 
-  if (loading) return <p>Loading NASA’s Image of the Day…</p>
-  if (error)   return <p>Error: {error}</p>
+  // When date changes, fetch APOD for that date
+  useEffect(() => {
+    if (date) fetchApod(date)
+  }, [date])
 
   return (
     <div style={{ maxWidth: 600, margin: '2rem auto', textAlign: 'center' }}>
-      <h1>{apod.title}</h1>
-      <img
-        src={apod.url}
-        alt={apod.title}
-        style={{ width: '100%', borderRadius: 8 }}
+      <h1>NASA Astronomy Picture of the Day</h1>
+      <input
+        type="date"
+        value={date}
+        max={new Date().toISOString().split('T')[0]}
+        onChange={e => setDate(e.target.value)}
+        style={{ marginBottom: '1rem', padding: '0.5rem', fontSize: '1rem' }}
       />
-      <p style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
-        {apod.explanation}
-      </p>
-      <p style={{ fontSize: '0.8rem', color: '#666' }}>
-        © {apod.copyright || 'Public Domain'} – {apod.date}
-      </p>
+      {loading && <p>Loading NASA’s Image of the Day…</p>}
+      {error && <p>Error: {error}</p>}
+      {apod && !loading && !error && (
+        <div>
+          <h2>{apod.title}</h2>
+          <img
+            src={apod.url}
+            alt={apod.title}
+            style={{ width: '100%', borderRadius: 8 }}
+          />
+          <p style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
+            {apod.explanation}
+          </p>
+          <p style={{ fontSize: '0.8rem', color: '#666' }}>
+            © {apod.copyright || 'Public Domain'} – {apod.date}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
-
 
 
