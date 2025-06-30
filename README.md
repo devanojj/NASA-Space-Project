@@ -17,9 +17,10 @@ The repository uses pnpm workspaces so dependencies are managed from the root `p
 Run the development servers in separate terminals:
 
 
+   ```bash
    pnpm dev:backend     # starts the Express API on port 3001 by default
    pnpm dev:frontend    # starts the React dev server on port 5173
-
+   ```
 
    During development the frontend is configured to proxy `/api` requests to the backend.
 
@@ -29,8 +30,10 @@ Run the development servers in separate terminals:
 
 Production builds can be created with:
 
+    ```bash
     pnpm build:backend
     pnpm build:frontend
+    ```
 
 
 Each command runs the respective workspace build script.
