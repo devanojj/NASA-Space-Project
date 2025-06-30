@@ -8,7 +8,6 @@ export default function App() {
   const [error, setError] = useState(null)
   const [date, setDate] = useState('')
 
-  // Fetch APOD data for a given date (or today if no date)
   const fetchApod = (selectedDate = '') => {
     setLoading(true)
     setError(null)
@@ -42,14 +41,13 @@ export default function App() {
   }, [date])
 
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', textAlign: 'center' }}>
+    <div className="app-container">
       <h1>NASA Astronomy Picture of the Day</h1>
       <input
         type="date"
         value={date}
         max={new Date().toISOString().split('T')[0]}
         onChange={e => setDate(e.target.value)}
-        style={{ marginBottom: '1rem', padding: '0.5rem', fontSize: '1rem' }}
       />
       {loading && <p>Loading NASA’s Image of the Day…</p>}
       {error && <p>Error: {error}</p>}
@@ -59,13 +57,9 @@ export default function App() {
           <img
             src={apod.url}
             alt={apod.title}
-            style={{ width: '100%', borderRadius: 8 }}
           />
           <p style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
             {apod.explanation}
-          </p>
-          <p style={{ fontSize: '0.8rem', color: '#666' }}>
-            © {apod.copyright || 'Public Domain'} – {apod.date}
           </p>
         </div>
       )}
