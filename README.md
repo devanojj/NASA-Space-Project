@@ -30,10 +30,10 @@ Run the development servers in separate terminals:
 
 Production builds can be created with:
 
-    ```bash
+
     pnpm build:backend
     pnpm build:frontend
-    ```
+
 
 
 Each command runs the respective workspace build script.
